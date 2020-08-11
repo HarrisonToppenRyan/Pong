@@ -7,28 +7,28 @@ wn.setup(width=800, height=600)
 wn.tracer(0)
 
 # Score 
-score_a = 0 
-score_b = 0
+score_1 = 0 
+score_2 = 0
 
-# Paddle A
-paddle_a = turtle.Turtle()
-paddle_a.speed(0)
-paddle_a.shape("square")
-paddle_a.color("white")
-paddle_a.shapesize(stretch_wid=5, stretch_len=1)
-paddle_a.penup()
-paddle_a.goto(-350, 0)
+# Paddle 1
+paddle_1 = turtle.Turtle()
+paddle_1.speed(0)
+paddle_1.shape("square")
+paddle_1.color("white")
+paddle_1.shapesize(stretch_wid=5, stretch_len=1)
+paddle_1.penup()
+paddle_1.goto(-350, 0)
 
-# Paddle B
-paddle_b = turtle.Turtle()
-paddle_b.speed(0)
-paddle_b.shape("square")
-paddle_b.color("white")
-paddle_b.shapesize(stretch_wid=5, stretch_len=1)
-paddle_b.penup()
-paddle_b.goto(350, 0)
+# Paddle 2
+paddle_2 = turtle.Turtle()
+paddle_2.speed(0)
+paddle_2.shape("square")
+paddle_2.color("white")
+paddle_2.shapesize(stretch_wid=5, stretch_len=1)
+paddle_2.penup()
+paddle_2.goto(350, 0)
 
-# Ball
+# The Tennis Ball
 ball = turtle.Turtle()
 ball.speed(0)
 ball.shape("square")
@@ -45,37 +45,37 @@ pen.color("white")
 pen.penup()
 pen.hideturtle()
 pen.goto(0, 260)
-pen.write("Player A: 0  Player B: 0", align="center", font=("Courier", 24, "normal"))
+pen.write("Player 1: 0  Player 2: 0", align="center", font=("Courier", 24, "normal"))
 
 # Function 
-def paddle_a_up():
-    y = paddle_a.ycor()
+def paddle_1_up():
+    y = paddle_1.ycor()
     y += 20
-    paddle_a.sety(y)
+    paddle_1.sety(y)
 
 
-def paddle_a_down():
-    y = paddle_a.ycor()
+def paddle_1_down():
+    y = paddle_1.ycor()
     y -= 20
-    paddle_a.sety(y)
+    paddle_1.sety(y)
 
-def paddle_b_up():
-    y = paddle_b.ycor()
+def paddle_2_up():
+    y = paddle_2.ycor()
     y += 20
-    paddle_b.sety(y)
+    paddle_2.sety(y)
 
 
-def paddle_b_down():
-    y = paddle_b.ycor()
+def paddle_2_down():
+    y = paddle_2.ycor()
     y -= 20
-    paddle_b.sety(y)
+    paddle_2.sety(y)
 
 # Keyboard binding 
 wn.listen()
-wn.onkeypress(paddle_a_up, "w")
-wn.onkeypress(paddle_a_down, "s")
-wn.onkeypress(paddle_b_up, "Up")
-wn.onkeypress(paddle_b_down, "Down")
+wn.onkeypress(paddle_1_up, "w")
+wn.onkeypress(paddle_1_down, "s")
+wn.onkeypress(paddle_1_up, "Up")
+wn.onkeypress(paddle_1_down, "Down")
 # Main Game Loop
 while True:
     wn.update()
@@ -96,24 +96,24 @@ while True:
     if ball.xcor() > 390:
         ball.goto(0, 0)
         ball.dx *= -1
-        score_a += 1
+        score_1 += 1
         pen.clear()
-        pen.write("Player A: {}  Player B: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
+        pen.write("Player A: {}  Player B: {}".format(score_1, score_2), align="center", font=("Courier", 24, "normal"))
     
     if ball.xcor() < -390:
         ball.goto(0, 0)
         ball.dx *= -1
-        score_b += 1
+        score_2 += 1
         pen.clear()
         pen.write("Player A: {}  Player B: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
 
     
     # Paddle and ball collisions
-    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40): 
+    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_2.ycor() + 40 and ball.ycor() > paddle_2.ycor() - 40): 
         ball.setx(340)
         ball.dx *= -1   
     
-    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40): 
+    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_1.ycor() + 40 and ball.ycor() > paddle_1.ycor() - 40): 
         ball.setx(-340)
         ball.dx *= -1   
 
